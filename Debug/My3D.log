@@ -1,0 +1,5 @@
+﻿  My3D.cpp
+G:\APP\TopCoder\Study\My3D\My3D.cpp(34,9): warning C4838: 从“int”转换到“DWORD”需要收缩转换
+  Rasterization.cpp
+  正在生成代码...
+  My3D.vcxproj -> G:\APP\TopCoder\Study\My3D\Debug\My3D.exe
