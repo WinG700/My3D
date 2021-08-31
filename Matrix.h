@@ -1,21 +1,20 @@
 #pragma once
-class Matrix4x4
+struct FTransfrom
 {
-public:
+	FTransfrom();
+};
+
+struct Matrix4x4
+{
 	float m[4][4];
-
 };
 
-class Matrix3x3
+struct Matrix3x3
 {
-public:
 	float m[3][3];
-
 };
 
-class Vector4
+struct Vector4
 {
-public:
 	float m[4];
-
 };
