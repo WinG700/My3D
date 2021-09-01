@@ -1,13 +1,10 @@
 ﻿// My3D.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
-#include <iostream>
 #include <windows.h>
 #include <tchar.h>
 #include "time.h"
 #include "Rasterization.h"
-
-using namespace std;
 
 int screen_exit = 0;
 int screen_mx = 0, screen_my = 0, screen_mb = 0;

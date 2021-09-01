@@ -1,7 +1,9 @@
 #pragma once
 
-constexpr int screen_w = 1920;
-constexpr int screen_h = 1080;
+#include "Matrix.h"
+
+constexpr int screen_w = 1280;
+constexpr int screen_h = 720;
 
 struct PixelColor
 {
