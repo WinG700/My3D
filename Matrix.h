@@ -2,24 +2,18 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-class Matrix4x4;
-class Matrix3x3;
-class Vector3;
-class Quaternions;
-
-struct FTransfrom
-{
-	FTransfrom();
-	Vector3 Location;
-	Quaternions Quat;
-	Vector3 Scale;
-};
+struct Matrix4x4;
+struct Matrix3x3;
+struct Vector3;
+struct Quaternions;
 
 struct Matrix4x4
 {
 	Matrix4x4();
 	Matrix4x4(float * f);
 	float m[4][4];
+	Vector3 operator*(const Vector3 &v3);
+	Matrix4x4 operator*(const Matrix4x4 &M4);
 };
 
 struct Matrix3x3
@@ -34,14 +28,27 @@ struct Vector3
 	float x;
 	float y;
 	float z;
+	Vector3 operator+(const Vector3 &v3);
 };
 
 struct Quaternions
 {
 	Quaternions();
+	void Normalize();
 	Quaternions(float In_x, float In_y, float In_z, float In_w);
 	float x;
 	float y;
 	float z;
 	float w;
+	Quaternions operator*(const Quaternions& Quat);
+};
+
+struct FTransfrom
+{
+	FTransfrom();
+	FTransfrom(const Vector3 &loc, const Quaternions &qua);
+	FTransfrom(const Vector3& loc, const Quaternions& qua, const Vector3& sca);
+	Vector3 Location;
+	Quaternions Quat;
+	Vector3 Scale;
 };

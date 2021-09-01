@@ -4,6 +4,7 @@ class Camera :
     public Actor
 {
 public:
-
+    Camera();
+    Camera(const FTransfrom& trans);
 };
 

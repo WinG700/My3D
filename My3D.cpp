@@ -5,6 +5,7 @@
 #include <tchar.h>
 #include "time.h"
 #include "Rasterization.h"
+#include "Camera.h"
 
 int screen_exit = 0;
 int screen_mx = 0, screen_my = 0, screen_mb = 0;
@@ -132,6 +133,7 @@ int main()
 	if (screen_init(screen_w, screen_h, A))
 		return -1;
 	Rasterization* rasterization = new Rasterization(screen_fb);
+	Camera* cam = new Camera(FTransfrom(Vector3(0,0,0), Quaternions(0, 0,0,1)));
 	double fps_time = clock(); //计算帧率
 	while (screen_exit == 0 && screen_keys[VK_ESCAPE] == 0) {
 		screen_dispatch();
