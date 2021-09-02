@@ -110,12 +110,22 @@ Quaternions::Quaternions()
 	w = 1;
 }
 
+Quaternions::Quaternions(Vector3 Axi, float Angle)
+{
+	x = Axi.x * sin(Radian(Angle));
+	y = Axi.y * sin(Radian(Angle));
+	z = Axi.z * sin(Radian(Angle));
+	w = cos(Radian(Angle));
+	Normalize();
+}
+
 Quaternions::Quaternions(float In_x, float In_y, float In_z, float In_w)
 {
 	x = In_x;
 	y = In_y;
 	z = In_z;
 	w = In_w;
+	Normalize();
 }
 
 void Quaternions::Normalize()
@@ -125,6 +135,11 @@ void Quaternions::Normalize()
 	y /= k;
 	z /= k;
 	w /= k;
+}
+
+Matrix4x4 Quaternions::ToMatrix4x4()
+{
+
 }
 
 Quaternions Quaternions::operator*(const Quaternions& Quat)

@@ -1,11 +1,15 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <math.h>
 using namespace std;
 struct Matrix4x4;
 struct Matrix3x3;
 struct Vector3;
 struct Quaternions;
+
+#define PI 3.14159265359
+#define Radian(x)  PI * x / 360.f
 
 struct Matrix4x4
 {
@@ -41,13 +45,15 @@ struct Vector3
 struct Quaternions
 {
 	Quaternions();
-	void Normalize();
+	Quaternions(Vector3 Axi, float Angle);
 	Quaternions(float In_x, float In_y, float In_z, float In_w);
 	float x;
 	float y;
 	float z;
 	float w;
 	Quaternions operator*(const Quaternions& Quat);
+	void Normalize();
+	Matrix4x4 ToMatrix4x4();
 };
 
 struct FTransfrom

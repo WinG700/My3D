@@ -3,9 +3,11 @@
 
 #include <windows.h>
 #include <tchar.h>
+#include <math.h>
 #include "time.h"
 #include "Rasterization.h"
 #include "Camera.h"
+
 #include "UWorld.h"
 
 int screen_exit = 0;
@@ -52,7 +54,6 @@ int screen_init(int w, int h, const TCHAR* title) {
 	hDC = GetDC(screen_handle);
 	screen_dc = CreateCompatibleDC(hDC);
 	ReleaseDC(screen_handle, hDC);
-
 	screen_hb = CreateDIBSection(screen_dc, &bi, DIB_RGB_COLORS, &ptr, 0, 0);
 	if (screen_hb == NULL) return -3;
 
@@ -136,7 +137,7 @@ UWorld* CreateWorld(Camera* Local_cam)
 
 void BuildWorld(UWorld* world)
 {
-	Actor* Cube = new Actor(FTransfrom(Vector3(-100.f, 0, 0), Quaternions(0,0,0,1)));
+	Actor* Cube = new Actor(FTransfrom(Vector3(-100.f, 0, 0), Quaternions(Vector3(0, 1, 0), 45.f)));
 	Cube->AddTringle(Vector3(10.f, -10.f, 10.f),Vector3(10.f, -10.f, -10.f), Vector3(10.f, 10.f, -10.f));
 	Cube->AddTringle(Vector3(10.f, -10.f, 10.f), Vector3(10.f, 10.f, -10.f), Vector3(10.f, 10.f, 10.f));
 	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
