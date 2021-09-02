@@ -79,6 +79,29 @@ Vector3 Vector3::operator+(const Vector3 &v3)
 	return Vector3(x+v3.x, y+v3.y, z+v3.z);
 }
 
+Vector3 Vector3::operator-(const Vector3& v3)
+{
+	return Vector3(x-v3.x, y-v3.y, z-v3.z);
+}
+
+float Vector3::operator*(const Vector3& v3) 
+{
+	return x*v3.x + y*v3.y + z*v3.z;
+}
+
+Vector3 Vector3::operator^(const Vector3& v3)
+{
+	return Vector3(y*v3.z - z*v3.y, z*v3.x - x*v3.z, x*v3.y - y*v3.x);
+}
+
+void Vector3::Normalize()
+{
+	float k = x*x + y*y + z*z;
+	x/=k;
+	y/=k;
+	z/=k;
+}
+
 Quaternions::Quaternions()
 {
 	x = 0;

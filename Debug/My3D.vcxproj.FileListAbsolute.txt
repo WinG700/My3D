@@ -2,3 +2,5 @@ G:\APP\TopCoder\Study\My3D\Debug\My3D.exe
 G:\APP\TopCoder\Study\My3D\Debug\My3D.pdb
 G:\My3D\Debug\My3D.exe
 G:\My3D\Debug\My3D.pdb
+E:\My3D\Debug\My3D.exe
+E:\My3D\Debug\My3D.pdb

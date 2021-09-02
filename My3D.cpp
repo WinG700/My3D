@@ -6,6 +6,7 @@
 #include "time.h"
 #include "Rasterization.h"
 #include "Camera.h"
+#include "UWorld.h"
 
 int screen_exit = 0;
 int screen_mx = 0, screen_my = 0, screen_mb = 0;
@@ -127,18 +128,43 @@ void screen_update() {
 	screen_dispatch();
 }
 
+UWorld* CreateWorld(Camera* Local_cam)
+{
+	UWorld* LocalWorld = new UWorld(Local_cam);
+	
+}
+
+void BuildWorld(UWorld* world)
+{
+	Actor* Cube = new Actor(FTransfrom(Vector3(-100.f, 0, 0), Quaternions(0,0,0,1)));
+	Cube->AddTringle(Vector3(10.f, -10.f, 10.f),Vector3(10.f, -10.f, -10.f), Vector3(10.f, 10.f, -10.f));
+	Cube->AddTringle(Vector3(10.f, -10.f, 10.f), Vector3(10.f, 10.f, -10.f), Vector3(10.f, 10.f, 10.f));
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
+	world->Actors.insert(Cube);
+}
+
 int main()
 {
 	TCHAR A[] = _T("My3D");
 	if (screen_init(screen_w, screen_h, A))
 		return -1;
-	Rasterization* rasterization = new Rasterization(screen_fb);
-	Camera* cam = new Camera(FTransfrom(Vector3(0,0,0), Quaternions(0, 0,0,1)));
+	Rasterization* rasterization = new Rasterization(screen_fb); //创建栅格化器
+	Camera* cam = new Camera(FTransfrom(Vector3(0, 0, 0), Quaternions(0, 0, 0, 1))); //创建相机
+	UWorld* World = CreateWorld(cam); //创建世界
 	double fps_time = clock(); //计算帧率
 	while (screen_exit == 0 && screen_keys[VK_ESCAPE] == 0) {
 		screen_dispatch();
 		screen_update();
-		cout << (double)(clock()- fps_time) << " ";
+		//cout << (double)(clock()- fps_time) << " "; //打印帧率
 		fps_time = clock();
 	}
 }

@@ -5,6 +5,7 @@ class Camera :
 {
 public:
     Camera();
+    ~Camera();
     Camera(const FTransfrom& trans);
 };
 

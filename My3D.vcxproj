@@ -144,6 +144,8 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="My3D.cpp" />
     <ClCompile Include="Rasterization.cpp" />
+    <ClCompile Include="UTriangle.cpp" />
+    <ClCompile Include="UWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -151,6 +153,8 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Rasterization.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="UTriangle.h" />
+    <ClInclude Include="UWorld.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="My3D.rc" />

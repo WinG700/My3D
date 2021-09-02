@@ -29,6 +29,13 @@ struct Vector3
 	float y;
 	float z;
 	Vector3 operator+(const Vector3 &v3);
+	Vector3 operator-(const Vector3& v3);
+	//点积
+	float operator*(const Vector3 &v3);
+	//叉积
+	Vector3 operator^(const Vector3 &v3);
+	//归一化
+	void Normalize();
 };
 
 struct Quaternions

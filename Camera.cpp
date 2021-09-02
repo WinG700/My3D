@@ -5,7 +5,11 @@ Camera::Camera()
 
 }
 
-Camera::Camera(const FTransfrom& trans)
+Camera::~Camera()
+{
+}
+
+Camera::Camera(const FTransfrom& trans) : Actor(trans)
 {
 
 }
