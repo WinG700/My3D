@@ -13,7 +13,7 @@ public:
 	vector<UTriangle*> Triangles;
 	string ActorName;
 
-	void AddTringle(Vector3 Point1, Vector3 Point2, Vector3 Point3);
-
+	void AddTringle(Vector3 Point1, Vector3 Point2, Vector3 Point3, bool bNormal = true);
+	void Tick(float DeltaSecond);
 };
 
