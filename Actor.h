@@ -14,6 +14,6 @@ public:
 	string ActorName;
 
 	void AddTringle(Vector3 Point1, Vector3 Point2, Vector3 Point3, bool bNormal = true);
-	void Tick(float DeltaSecond);
+	void Tick(double DeltaSecond);
 };
 

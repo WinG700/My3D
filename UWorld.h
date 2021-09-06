@@ -12,6 +12,6 @@ public:
 	set<Actor*> Actors;
 	Camera* Cam;
 	Rasterization* rasterization;
-	void Tick(float DeltaSecond);
+	void Tick(double DeltaSecond);
 };
 

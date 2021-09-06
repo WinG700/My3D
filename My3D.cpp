@@ -159,7 +159,7 @@ int main()
 	World->Tick(0.f);
 	while (screen_exit == 0 && screen_keys[VK_ESCAPE] == 0) {
 		cam->ActorTransform.Quat = cam->ActorTransform.Quat * Quaternions(Vector3(0, 1, 0), 1);
-		World->Tick(float(clock()-fps_time)/1000.f);
+		World->Tick((double)(clock()-fps_time)/1000.f);
 		screen_dispatch();
 		screen_update();
 		//cout << clock()- fps_time << " "; //打印帧率

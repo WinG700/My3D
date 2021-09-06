@@ -35,5 +35,6 @@ void UTriangle::Calculate_NormalVector()
 {
 	NormalVector = (Point2 - Point1)^(Point3 - Point1);
 	NormalVector.Normalize();
+	//NormalVector.CoutThis();
 }
 

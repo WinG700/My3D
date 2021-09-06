@@ -19,64 +19,64 @@ constexpr int screen_h = 450;
 struct Matrix4x4
 {
 	Matrix4x4();
-	Matrix4x4(float * f);
-	float m[4][4];
+	Matrix4x4(double* f);
+	double m[4][4];
 	Vector3 operator*(const Vector3 &v3);
 	Matrix4x4 operator*(const Matrix4x4 &M4);
-	void CoutThis();
+	void CoutThis(string head);
 };
 
 struct Matrix3x3
 {
-	float m[3][3];
+	double m[3][3];
 };
 
 struct Vector2
 {
 	Vector2();
-	Vector2(float In_x, float In_y);
-	float x;
-	float y;
-	float operator*(const Vector2& v2);
+	Vector2(double In_x, double In_y);
+	double x;
+	double y;
+	double operator*(const Vector2& v2);
 	Vector2 operator-(const Vector2& v2);
 	static bool InTriangle(Vector2 A, Vector2 B, Vector2 C, Vector2 P);
-	void CoutThis();
+	void CoutThis(string head);
 };
 
 struct Vector3
 {
 	Vector3();
-	Vector3(float all_value);
-	Vector3(float In_x, float In_y, float In_z);
-	float x;
-	float y;
-	float z;
+	Vector3(double all_value);
+	Vector3(double In_x, double In_y, double In_z);
+	double x;
+	double y;
+	double z;
 	Vector3 operator+(const Vector3 &v3);
 	Vector3 operator-(const Vector3& v3);
 	//点积
-	float operator*(const Vector3 &v3);
+	double operator*(const Vector3 &v3);
 	//叉积
 	Vector3 operator^(const Vector3 &v3);
 	//归一化
 	void Normalize();
-	void CoutThis();
+	void CoutThis(string head);
 
-	
+	void CheckZero();
 };
 
 struct Quaternions
 {
 	Quaternions();
-	Quaternions(Vector3 Axi, float Angle);
-	Quaternions(float In_x, float In_y, float In_z, float In_w);
-	float x;
-	float y;
-	float z;
-	float w;
+	Quaternions(Vector3 Axi, double Angle);
+	Quaternions(double In_x, double In_y, double In_z, double In_w);
+	double x;
+	double y;
+	double z;
+	double w;
 	Quaternions operator*(const Quaternions& Quat);
 	void Normalize();
 	Matrix4x4 ToMatrix4x4();
-	void CoutThis();
+	void CoutThis(string head);
 	Vector3 GetForward();
 };
 
@@ -100,5 +100,5 @@ struct FTransfrom
 	Quaternions Quat;
 	Vector3 Scale;
 	Matrix4x4 ToAffineMatrix(bool WorldToRel = false);
-	void CoutThis();
+	void CoutThis(string head);
 };

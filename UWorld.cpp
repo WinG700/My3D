@@ -10,7 +10,7 @@ UWorld::UWorld(Camera* In_Cam)
 	Cam = In_Cam;
 }
 
-void UWorld::Tick(float DeltaSecond)
+void UWorld::Tick(double DeltaSecond)
 {
 	rasterization->DrawBackground();
 	Matrix4x4 Cam_Trans = Cam->ActorTransform.ToAffineMatrix(true);
@@ -20,9 +20,13 @@ void UWorld::Tick(float DeltaSecond)
 		A->Tick(DeltaSecond);
 		for (UTriangle* Triangle : A->Triangles)
 		{	
-			if (Triangle->NormalVector * Cam->ActorTransform.Quat.GetForward() < 0)
-			{
-				cout << Triangle->NormalVector * Cam->ActorTransform.Quat.GetForward() << endl;
+			if ((A_Trans * Triangle->NormalVector) * Cam->ActorTransform.Quat.GetForward() < 0)
+			{	
+				
+				Vector3 x = Cam->ActorTransform.Quat.GetForward();
+				//x.CoutThis();
+				//Cam->ActorTransform.Quat.GetForward().CoutThis();
+				//cout << Triangle->NormalVector * Cam->ActorTransform.Quat.GetForward() << endl;
 				Vector3 NewPoint1 = (*Cam->GetPerspectiveMatrix()) * Cam->WorldToCamera(Cam_Trans * A_Trans * Triangle->Point1);
 				//NewPoint1.CoutThis();
 				Vector3 NewPoint2 = (*Cam->GetPerspectiveMatrix()) * Cam->WorldToCamera(Cam_Trans * A_Trans * Triangle->Point2);

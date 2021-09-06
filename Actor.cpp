@@ -25,7 +25,7 @@ void Actor::AddTringle(Vector3 Point1, Vector3 Point2, Vector3 Point3, bool bNor
 	Triangles.push_back(LocalVar);
 }
 
-void Actor::Tick(float DeltaSecond)
+void Actor::Tick(double DeltaSecond)
 {
 
 }

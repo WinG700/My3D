@@ -69,12 +69,12 @@ Matrix4x4 FTransfrom::ToAffineMatrix(bool WorldToRel)
 	return  M_Translation * M_Rotation * M_Scale;
 }
 
-void FTransfrom::CoutThis()
+void FTransfrom::CoutThis(string head)
 {
-	Location.CoutThis();
-	Quat.CoutThis();
-	Scale.CoutThis();
-	ToAffineMatrix().CoutThis();
+	Location.CoutThis(head);
+	Quat.CoutThis(head);
+	Scale.CoutThis(head);
+	ToAffineMatrix().CoutThis(head);
 }
 
 Matrix4x4::Matrix4x4()
@@ -89,9 +89,9 @@ Matrix4x4::Matrix4x4()
 	m[3][3] = 1;
 }
 
-Matrix4x4::Matrix4x4(float* f)
+Matrix4x4::Matrix4x4(double* f)
 {
-	if (sizeof(f) / sizeof(float) >= 11.9f)
+	if (sizeof(f) / sizeof(double) >= 11.9f)
 	{
 		m[0][0] = f[0]; m[0][0] = f[1]; m[0][0] = f[2];  m[0][0] = f[3];
 		m[0][0] = f[4]; m[0][0] = f[5]; m[0][0] = f[6];  m[0][0] = f[7];
@@ -108,7 +108,7 @@ Matrix4x4::Matrix4x4(float* f)
 
 Vector3 Matrix4x4::operator*(const Vector3 &v3)
 {
-	float x[4];
+	double x[4];
 	for (int i=0; i<4; i++)
 	{
 		x[i] = m[i][0] * v3.x + m[i][1] * v3.y + m[i][2]*v3.z + m[i][3]*1.f;
@@ -134,9 +134,9 @@ Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &M4)
 	return M;
 }
 
-void Matrix4x4::CoutThis()
+void Matrix4x4::CoutThis(string head)
 {
-	cout << "Matrix4x4 : " << endl;
+	cout << head << " Matrix4x4 : " << endl;
 	for (int i = 0; i < 4 ; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -154,14 +154,14 @@ Vector3::Vector3()
 	z = 0.f;
 }
 
-Vector3::Vector3(float In_x, float In_y, float In_z)
+Vector3::Vector3(double In_x, double In_y, double In_z)
 {
 	x = In_x;
 	y = In_y;
 	z = In_z;
 }
 
-Vector3::Vector3(float all_value)
+Vector3::Vector3(double all_value)
 {
 	x = all_value;
 	y = all_value;
@@ -178,7 +178,7 @@ Vector3 Vector3::operator-(const Vector3& v3)
 	return Vector3(x-v3.x, y-v3.y, z-v3.z);
 }
 
-float Vector3::operator*(const Vector3& v3) 
+double Vector3::operator*(const Vector3& v3)
 {
 	return x*v3.x + y*v3.y + z*v3.z;
 }
@@ -190,15 +190,22 @@ Vector3 Vector3::operator^(const Vector3& v3)
 
 void Vector3::Normalize()
 {
-	float k = x*x + y*y + z*z;
+	double k = sqrt(x*x + y*y + z*z);
 	x/=k;
 	y/=k;
 	z/=k;
+
+	//CheckZero();
 }
 
-void Vector3::CoutThis()
+void Vector3::CoutThis(string head)
 {
-	cout << "Vec3 x : " << x << " y : " << y << " z : " << z << endl;
+	cout << head << " Vec3 x : " << x << " y : " << y << " z : " << z << endl;
+}
+
+void Vector3::CheckZero()
+{
+
 }
 
 bool Vector2::InTriangle(Vector2 A, Vector2 B, Vector2 C, Vector2 P)
@@ -207,21 +214,21 @@ bool Vector2::InTriangle(Vector2 A, Vector2 B, Vector2 C, Vector2 P)
 	Vector2 v1 = B - A;
 	Vector2 v2 = P - A;
 
-	float dot00 = v0*v0;
-	float dot01 = v0*v1;
-	float dot02 = v0*v2;
-	float dot11 = v1*v1;
-	float dot12 = v1*v2;
+	double dot00 = v0*v0;
+	double dot01 = v0*v1;
+	double dot02 = v0*v2;
+	double dot11 = v1*v1;
+	double dot12 = v1*v2;
 
-	float inverDeno = 1 / (dot00 * dot11 - dot01 * dot01);
+	double inverDeno = 1 / (dot00 * dot11 - dot01 * dot01);
 
-	float u = (dot11 * dot02 - dot01 * dot12) * inverDeno;
+	double u = (dot11 * dot02 - dot01 * dot12) * inverDeno;
 	if (u < 0 || u > 1) // if u out of range, return directly
 	{
 		return false;
 	}
 
-	float v = (dot00 * dot12 - dot01 * dot02) * inverDeno;
+	double v = (dot00 * dot12 - dot01 * dot02) * inverDeno;
 	if (v < 0 || v > 1) // if v out of range, return directly
 	{
 		return false;
@@ -230,9 +237,9 @@ bool Vector2::InTriangle(Vector2 A, Vector2 B, Vector2 C, Vector2 P)
 	return u + v <= 1;
 }
 
-void Vector2::CoutThis()
+void Vector2::CoutThis(string head)
 {
-	cout << "Vec2 x : " << x << " y : " << y << endl;
+	cout << head << " Vec2 x : " << x << " y : " << y << endl;
 }
 
 Quaternions::Quaternions()
@@ -243,7 +250,7 @@ Quaternions::Quaternions()
 	w = 1;
 }
 
-Quaternions::Quaternions(Vector3 Axi, float Angle)
+Quaternions::Quaternions(Vector3 Axi, double Angle)
 {
 	x = Axi.x * sin(Radian(Angle));
 	y = Axi.y * sin(Radian(Angle));
@@ -252,7 +259,7 @@ Quaternions::Quaternions(Vector3 Axi, float Angle)
 	Normalize();
 }
 
-Quaternions::Quaternions(float In_x, float In_y, float In_z, float In_w)
+Quaternions::Quaternions(double In_x, double In_y, double In_z, double In_w)
 {
 	x = In_x;
 	y = In_y;
@@ -263,7 +270,7 @@ Quaternions::Quaternions(float In_x, float In_y, float In_z, float In_w)
 
 void Quaternions::Normalize()
 {
-	float k = x * x + y * y + z * z + w * w;
+	double k = x * x + y * y + z * z + w * w;
 	x /= k;
 	y /= k;
 	z /= k;
@@ -280,9 +287,9 @@ Matrix4x4 Quaternions::ToMatrix4x4()
 	return Rot_Matrix4x4;
 }
 
-void Quaternions::CoutThis()
+void Quaternions::CoutThis(string head)
 {
-	cout << "Quat x : " << x << " y : " << y << " z : " << z << " w : " << w << endl;
+	cout << head << " Quat x : " << x << " y : " << y << " z : " << z << " w : " << w << endl;
 }
 
 Vector3 Quaternions::GetForward()
@@ -294,10 +301,10 @@ Vector3 Quaternions::GetForward()
 
 Quaternions Quaternions::operator*(const Quaternions& Quat)
 {
-	float New_x = (y * Quat.z - z * Quat.y + x * Quat.w + w * Quat.x);
-	float New_y = (z * Quat.x - x * Quat.z + y * Quat.w + w * Quat.y);
-	float New_z = (x * Quat.y - y * Quat.x + z * Quat.w + w * Quat.z);
-	float New_w = (w * Quat.w - x * Quat.x - y * Quat.y - z * Quat.z);
+	double New_x = (y * Quat.z - z * Quat.y + x * Quat.w + w * Quat.x);
+	double New_y = (z * Quat.x - x * Quat.z + y * Quat.w + w * Quat.y);
+	double New_z = (x * Quat.y - y * Quat.x + z * Quat.w + w * Quat.z);
+	double New_w = (w * Quat.w - x * Quat.x - y * Quat.y - z * Quat.z);
 	return Quaternions(New_x, New_y, New_z, New_w);
 }
 
@@ -306,13 +313,13 @@ Vector2::Vector2()
 
 }
 
-Vector2::Vector2(float In_x, float In_y)
+Vector2::Vector2(double In_x, double In_y)
 {
 	x = In_x;
 	y = In_y;
 }
 
-float Vector2::operator*(const Vector2& v2)
+double Vector2::operator*(const Vector2& v2)
 {
 	return x * v2.x + y * v2.y;
 }
