@@ -13,7 +13,6 @@ UTriangle::UTriangle(Vector3 In_Point1,
 					Point3(In_Point3)
 {
 	//Calculate_NormalVector();
-
 }
 
 UTriangle::UTriangle(Vector3 In_Point1,

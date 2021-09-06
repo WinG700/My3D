@@ -32,7 +32,7 @@ void Rasterization::AddTringle(Vector3 Point1, Vector3 Point2, Vector3 Point3, C
 {
 	UTriangle* LocalVar = new UTriangle(ToScreenPoint(Point1), ToScreenPoint(Point2), ToScreenPoint(Point3), In_Color);
 	if (bNormal)LocalVar->Calculate_NormalVector();
-	Triangles.push_back(LocalVar);
+	//Triangles.push_back(LocalVar);
 	DrawTringle(LocalVar);
 }
 
@@ -43,10 +43,10 @@ Vector3 Rasterization::ToScreenPoint(Vector3 InPoint)
 
 void Rasterization::DrawTringle(UTriangle* In_Triangles)
 {
-	cout << In_Triangles->Point1.x << " " << In_Triangles->Point1.y<< endl;
-	cout << In_Triangles->Point2.x << " " << In_Triangles->Point2.y << endl;
-	cout << In_Triangles->Point3.x << " " << In_Triangles->Point3.y << endl;
-	cout << Vector2::InTriangle(Vector2(0, 1), Vector2(0, 0), Vector2(1, 0), Vector2(0.2, 0.2));
+	//cout << In_Triangles->Point1.x << " " << In_Triangles->Point1.y<< endl;
+	//cout << In_Triangles->Point2.x << " " << In_Triangles->Point2.y << endl;
+	//cout << In_Triangles->Point3.x << " " << In_Triangles->Point3.y << endl;
+	//cout << Vector2::InTriangle(Vector2(0, 1), Vector2(0, 0), Vector2(1, 0), Vector2(0.2, 0.2));
 	for (int i = 0; i < screen_h; i++)
 	{
 		for (int j = 0; j < screen_w; j++)

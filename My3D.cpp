@@ -141,27 +141,6 @@ void BuildWorld(UWorld* world)
 	Ground->AddTringle(Vector3(1000.f, 1000.f, 0), Vector3(-1000.f, 1000.f, 0), Vector3(1000.f, -1000.f, 0));
 	Ground->AddTringle(Vector3(-1000.f, -1000.f, 0), Vector3(1000.f, -1000.f, 0), Vector3(-1000.f, 1000.f, 0));
 	world->Actors.insert(Ground);
-	//Actor* Cube = new Actor(FTransfrom(Vector3(100.f, 0, 100.f), Quaternions(Vector3(0, 1, 0), -45.f), Vector3(1.5f)));
-	//Cube->AddTringle(Vector3(10.f, -10.f, 10.f),Vector3(10.f, -10.f, -10.f), Vector3(10.f, 10.f, -10.f));
-	//Cube->AddTringle(Vector3(10.f, -10.f, 10.f), Vector3(10.f, 10.f, -10.f), Vector3(10.f, 10.f, 10.f));
-	
-	//Vector3 v3 = Cube->ActorTransform.ToAffineMatrix() * Vector3(1, 1, 1);
-	//v3.CoutThis();
-	//Vector3 v3_2 = Cube->ActorTransform.ToAffineMatrix(true) * v3;
-	//v3_2.CoutThis();
-	//v3.CoutThis();
-
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//Cube->AddTringle(Vector3(), Vector3(), Vector3());
-	//world->Actors.insert(Cube);
 }
 
 int main()
@@ -171,7 +150,7 @@ int main()
 		return -1;
 	long fps_time = clock(); //计算帧率
 	Rasterization* rasterization = new Rasterization(screen_fb); //创建栅格化器
-	Camera* cam = new Camera(FTransfrom(Vector3(0, 0, 2000.f), Quaternions(Vector3(0, 1, 0), 90))); //创建相机
+	Camera* cam = new Camera(FTransfrom(Vector3(0, 0, 1500.f), Quaternions(Vector3(0, 1, 0), 90))); //创建相机
 	UWorld* World = CreateWorld(cam); //创建世界
 	World->rasterization = rasterization;
 	BuildWorld(World);
@@ -179,7 +158,7 @@ int main()
 	cam->CreatePerPerspectiveMatrix(1.f);
 	World->Tick(0.f);
 	while (screen_exit == 0 && screen_keys[VK_ESCAPE] == 0) {
-		cam->ActorTransform.Quat = cam->ActorTransform.Quat * Quaternions(Vector3(0, 1, 0), -1);
+		cam->ActorTransform.Quat = cam->ActorTransform.Quat * Quaternions(Vector3(0, 1, 0), 1);
 		World->Tick(float(clock()-fps_time)/1000.f);
 		screen_dispatch();
 		screen_update();

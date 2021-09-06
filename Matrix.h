@@ -11,8 +11,8 @@ struct Quaternions;
 #define PI 3.14159265359
 #define Radian(x)  PI * x / 360.f
 
-constexpr int screen_w = 1280;
-constexpr int screen_h = 720;
+constexpr int screen_w = 800;
+constexpr int screen_h = 450;
 
 
 
