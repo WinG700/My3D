@@ -21,8 +21,8 @@ void Rasterization::DrawBackground()
 	{
 		for (int j = 0; j < screen_w; j++)
 		{
-			*Pixel[i][j].R = (unsigned char)(i * 255.f / screen_h) ;
-			*Pixel[i][j].G = 0;
+			*Pixel[i][j].R = (unsigned char)(i * 255.f / screen_h);
+			*Pixel[i][j].G = (unsigned char)(j * 255.f / screen_w);
 			*Pixel[i][j].B = 0;
 		}
 	}

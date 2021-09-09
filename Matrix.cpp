@@ -195,7 +195,7 @@ void Vector3::Normalize()
 	y/=k;
 	z/=k;
 
-	//CheckZero();
+	CheckZero();
 }
 
 void Vector3::CoutThis(string head)
@@ -205,7 +205,18 @@ void Vector3::CoutThis(string head)
 
 void Vector3::CheckZero()
 {
-
+	if (NearZero(x))
+	{
+		x = 0;
+	}
+	if (NearZero(y))
+	{
+		y = 0;
+	}
+	if (NearZero(z))
+	{
+		z = 0;
+	}
 }
 
 bool Vector2::InTriangle(Vector2 A, Vector2 B, Vector2 C, Vector2 P)
@@ -296,6 +307,7 @@ Vector3 Quaternions::GetForward()
 {
 	Vector3 a = ToMatrix4x4()* Vector3(1, 0, 0);
 	a.Normalize();
+	//a.CoutThis("GetForward");
 	return a;
 }
 
@@ -305,7 +317,9 @@ Quaternions Quaternions::operator*(const Quaternions& Quat)
 	double New_y = (z * Quat.x - x * Quat.z + y * Quat.w + w * Quat.y);
 	double New_z = (x * Quat.y - y * Quat.x + z * Quat.w + w * Quat.z);
 	double New_w = (w * Quat.w - x * Quat.x - y * Quat.y - z * Quat.z);
-	return Quaternions(New_x, New_y, New_z, New_w);
+	Quaternions k = Quaternions(New_x, New_y, New_z, New_w);
+	k.Normalize();
+	return k;
 }
 
 Vector2::Vector2()
@@ -331,7 +345,7 @@ Vector2 Vector2::operator-(const Vector2& v2)
 
 Color3::Color3()
 {
-
+	
 }
 
 Color3::Color3(int In_R, int In_G, int In_B)

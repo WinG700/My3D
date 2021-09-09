@@ -10,6 +10,7 @@ struct Quaternions;
 
 #define PI 3.14159265359
 #define Radian(x)  PI * x / 360.f
+#define NearZero(x) x <= 0.00000001 && x>=-0.00000001
 
 constexpr int screen_w = 800;
 constexpr int screen_h = 450;

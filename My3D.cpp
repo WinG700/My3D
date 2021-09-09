@@ -151,6 +151,9 @@ int main()
 	long fps_time = clock(); //计算帧率
 	Rasterization* rasterization = new Rasterization(screen_fb); //创建栅格化器
 	Camera* cam = new Camera(FTransfrom(Vector3(0, 0, 1500.f), Quaternions(Vector3(0, 1, 0), 90))); //创建相机
+	//Quaternions(Vector3(0, 1, 0), 90).CoutThis("1");
+	//Quaternions(Vector3(0, 1, 0), 1).CoutThis("2");
+	(Quaternions(Vector3(0, 1, 0), 90)* Quaternions(Vector3(0, 1, 0), 1)).CoutThis("3");
 	UWorld* World = CreateWorld(cam); //创建世界
 	World->rasterization = rasterization;
 	BuildWorld(World);
@@ -158,11 +161,11 @@ int main()
 	cam->CreatePerPerspectiveMatrix(1.f);
 	World->Tick(0.f);
 	while (screen_exit == 0 && screen_keys[VK_ESCAPE] == 0) {
-		cam->ActorTransform.Quat = cam->ActorTransform.Quat * Quaternions(Vector3(0, 1, 0), 1);
+		cam->ActorTransform.Quat = cam->ActorTransform.Quat * Quaternions(Vector3(0, 1, 0), -1);
 		World->Tick((double)(clock()-fps_time)/1000.f);
 		screen_dispatch();
 		screen_update();
-		//cout << clock()- fps_time << " "; //打印帧率
+		cout << clock()- fps_time << " "; //打印帧率
 		fps_time = clock();
 	}
 }

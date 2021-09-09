@@ -1,2 +1,1 @@
 E:\My3D\x64\Debug\My3D.exe
-E:\My3D\x64\Debug\My3D.pdb

@@ -1,2 +1,5 @@
-﻿  UWorld.cpp
-  My3D.vcxproj -> G:\My3D\Debug\My3D.exe
+﻿  My3D.cpp
+E:\My3D\My3D.cpp(35,9): warning C4838: conversion from 'int' to 'DWORD' requires a narrowing conversion
+  UWorld.cpp
+  Generating Code...
+  My3D.vcxproj -> E:\My3D\Debug\My3D.exe
