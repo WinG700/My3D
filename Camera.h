@@ -8,12 +8,12 @@ public:
     ~Camera();
     Camera(const FTransfrom& trans);
 
-    float FovX;
+    double FovX;
     Matrix4x4* PerspectiveMatrix;
 
-	void SetFovX(const float& _FovX);
+	void SetFovX(const double& _FovX);
 	Vector3 WorldToCamera(const Vector3& v3);
     Matrix4x4* GetPerspectiveMatrix();
-    Matrix4x4* CreatePerPerspectiveMatrix(float N);
+    Matrix4x4* CreatePerPerspectiveMatrix(double N, double F);
 };
 

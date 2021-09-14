@@ -42,9 +42,13 @@ void UWorld::Tick(double DeltaSecond)
 				NewPoint2.y = -1.f * NewPoint2.y;
 				NewPoint3.x = -1.f * NewPoint3.x;
 				NewPoint3.y = -1.f * NewPoint3.y;
-				NewPoint1.CoutThis("1");
-				NewPoint2.CoutThis("2");
-				NewPoint3.CoutThis("3");
+				if (NewPoint1.z >= 1.f || NewPoint2.z >= 1.f || NewPoint3.z >= 1.f)
+				{
+					NewPoint1.CoutThis("1");
+					NewPoint2.CoutThis("2");
+					NewPoint3.CoutThis("3");
+				}
+
 				rasterization->AddTringle(NewPoint1, NewPoint2, NewPoint3, Triangle->color3, false);
 			}
 			

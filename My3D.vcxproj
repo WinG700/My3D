@@ -155,6 +155,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="UTriangle.h" />
     <ClInclude Include="UWorld.h" />
+    <ClInclude Include="Windows.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="My3D.rc" />

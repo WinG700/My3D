@@ -59,6 +59,9 @@
     <ClInclude Include="UTriangle.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Windows.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="My3D.rc">

@@ -6,10 +6,10 @@ Rasterization::Rasterization(unsigned char* P)
 	{
 		for (int j = 0; j < screen_w; j++)
 		{
-			Pixel[i][j].R = P + (i * screen_w + j) * 4;
+			Pixel[i][j].B = P + (i * screen_w + j) * 4;
 			//*Pixel[i][j].R = (unsigned char)(((float)i / screen_h) * 255.f);
 			Pixel[i][j].G = P + (i * screen_w + j) * 4 + 1;
-			Pixel[i][j].B = P + (i * screen_w + j) * 4 + 2;
+			Pixel[i][j].R = P + (i * screen_w + j) * 4 + 2;
 			Pixel[i][j].S = P + (i * screen_w + j) * 4 + 3;
 		}
 	}
@@ -17,13 +17,14 @@ Rasterization::Rasterization(unsigned char* P)
 
 void Rasterization::DrawBackground()
 {
+	/*memset(Pixel[0][0], 0, w * h * 4);*/
 	for (int i = 0; i < screen_h; i++)
 	{
 		for (int j = 0; j < screen_w; j++)
 		{
-			*Pixel[i][j].R = (unsigned char)(i * 255.f / screen_h);
-			*Pixel[i][j].G = (unsigned char)(j * 255.f / screen_w);
-			*Pixel[i][j].B = 0;
+			*Pixel[i][j].R = 102;//(unsigned char)(i * 255.f / screen_h);
+			*Pixel[i][j].G = 204;//(unsigned char)(j * 255.f / screen_w);
+			*Pixel[i][j].B = 255;
 		}
 	}
 }
@@ -54,14 +55,13 @@ void Rasterization::DrawTringle(UTriangle* In_Triangles)
 			if (Vector2::InTriangle(Vector2(In_Triangles->Point1.x, In_Triangles->Point1.y), 
 									Vector2(In_Triangles->Point2.x, In_Triangles->Point2.y), 
 									Vector2(In_Triangles->Point3.x, In_Triangles->Point3.y), 
-									Vector2((float)j + 0.5f, (float)i + 0.5f)))
+									Vector2((double)j + 0.5f, (double)i + 0.5f)))
 			{
 				*Pixel[i][j].R = In_Triangles->color3.R;
 				*Pixel[i][j].G = In_Triangles->color3.G;
 				*Pixel[i][j].B = In_Triangles->color3.B;
 				//cout << "yes" <<endl;
 			}
-			
 		}
 	}
 }
