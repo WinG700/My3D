@@ -20,10 +20,16 @@ UWorld* CreateWorld(Camera* Local_cam)
 
 void BuildWorld(UWorld* world)
 {
+	//添加一个地面
 	Actor* Ground = new Actor(FTransfrom(Vector3(0, 0, 0), Quaternions(0, 0, 0, 1)));
 	Ground->AddTringle(Vector3(1000.f, 1000.f, 0), Vector3(-1000.f, 1000.f, 0), Vector3(1000.f, -1000.f, 0));
-	//Ground->AddTringle(Vector3(-1000.f, -1000.f, 0), Vector3(1000.f, -1000.f, 0), Vector3(-1000.f, 1000.f, 0));
+	Ground->AddTringle(Vector3(-1000.f, -1000.f, 0), Vector3(1000.f, -1000.f, 0), Vector3(-1000.f, 1000.f, 0));
 	world->Actors.insert(Ground);
+	//添加一个三棱锥
+	Actor* TriangularPrism = new Actor(FTransfrom(Vector3(0, 0, 0), Quaternions(0, 0, 0, 1)));
+	TriangularPrism->AddVertex({Vector3(2 50.0/cos(Radian(30)), 0, 0), Vector3(-250.0*tan(Radian(30)), 250, 0),  Vector3(-250.0 * tan(Radian(30)), -250.0, 0) , Vector3(0, 0, 500.0)});
+	TriangularPrism->AddTringle({{0, 1, 3},{2, 0, 3}, {1, 2, 3}});
+	world->Actors.insert(TriangularPrism);
 }
 
 int main()
@@ -34,7 +40,6 @@ int main()
 	long fps_time = clock(); //计算帧率
 	Rasterization* rasterization = new Rasterization(screen_fb); //创建栅格化器
 	Camera* cam = new Camera(FTransfrom(Vector3(0, 0, 1500.f), Quaternions(Vector3(0, 1, 0), 90))); //创建相机
-	(Quaternions(Vector3(0, 1, 0), 90)* Quaternions(Vector3(0, 1, 0), 1)).CoutThis("3");
 	UWorld* World = CreateWorld(cam); //创建世界
 	World->rasterization = rasterization;
 	BuildWorld(World);
@@ -46,7 +51,7 @@ int main()
 		World->Tick((double)(clock()-fps_time)/1000.f);
 		screen_dispatch();
 		screen_update();
-		cout << clock()- fps_time << " "; //打印帧率
+		//cout << clock()- fps_time << " "; //打印帧率
 		fps_time = clock();
 	}
 }

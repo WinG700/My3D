@@ -6,13 +6,14 @@ using namespace std;
 struct Matrix4x4;
 struct Matrix3x3;
 struct Vector3;
+struct Vector4;
 struct Quaternions;
 
 #define PI 3.14159265359
 #define Radian(x)  PI * x / 360.f
 #define NearZero(x) x <= 0.00000001 && x>=-0.00000001
 #define NearPlane 1.0
-#define FarPlane 1000.0
+#define FarPlane 3000.0
 
 constexpr int screen_w = 800;
 constexpr int screen_h = 450;
@@ -25,6 +26,8 @@ struct Matrix4x4
 	Matrix4x4(double* f);
 	double m[4][4];
 	Vector3 operator*(const Vector3 &v3);
+	Vector3 operator&(const Vector3& v3);
+	Vector4 operator^(const Vector3 &v3);
 	Matrix4x4 operator*(const Matrix4x4 &M4);
 	void CoutThis(string head);
 };
@@ -67,6 +70,18 @@ struct Vector3
 	void CheckZero();
 };
 
+struct Vector4
+{
+	Vector4();
+	//Vector4(double all_value);
+	Vector4(double In_x, double In_y, double In_z, double In_w);
+	double x;
+	double y;
+	double z;
+	double w;
+	void CoutThis(string head);
+};
+
 struct Quaternions
 {
 	Quaternions();
@@ -98,7 +113,7 @@ struct FTransfrom
 {
 	FTransfrom();
 	FTransfrom(const Vector3 &loc, const Quaternions &qua);
-	FTransfrom(const Vector3& loc, const Quaternions& qua, const Vector3& sca);
+	FTransfrom(const Vector3 &loc, const Quaternions &qua, const Vector3 &sca);
 	Vector3 Location;
 	Quaternions Quat;
 	Vector3 Scale;

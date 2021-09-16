@@ -120,6 +120,34 @@ Vector3 Matrix4x4::operator*(const Vector3 &v3)
 			);
 }
 
+Vector3 Matrix4x4::operator&(const Vector3& v3)
+{
+	double x[4];
+	for (int i = 0; i < 4; i++)
+	{
+		x[i] = m[i][0] * v3.x + m[i][1] * v3.y + m[i][2] * v3.z + m[i][3] * 1.f;
+	}
+	x[0] /= abs(x[3]);
+	x[1] /= abs(x[3]);
+	x[2] /= abs(x[3]);
+	return Vector3(x[0], x[1], x[2]
+	);
+}
+
+Vector4 Matrix4x4::operator^(const Vector3& v3)
+{
+	double x[4];
+	for (int i = 0; i < 4; i++)
+	{
+		x[i] = m[i][0] * v3.x + m[i][1] * v3.y + m[i][2] * v3.z + m[i][3] * 1.f;
+	}
+	//x[0] /= x[3];
+	//x[1] /= x[3];
+	//x[2] /= x[3];
+	return Vector4(x[0], x[1], x[2], x[3]
+	);
+}
+
 Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &M4)
 {
 	Matrix4x4 M;
@@ -133,6 +161,8 @@ Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &M4)
 	}
 	return M;
 }
+
+
 
 void Matrix4x4::CoutThis(string head)
 {
@@ -217,40 +247,6 @@ void Vector3::CheckZero()
 	{
 		z = 0;
 	}
-}
-
-bool Vector2::InTriangle(Vector2 A, Vector2 B, Vector2 C, Vector2 P)
-{
-	Vector2 v0 = C - A;
-	Vector2 v1 = B - A;
-	Vector2 v2 = P - A;
-
-	double dot00 = v0*v0;
-	double dot01 = v0*v1;
-	double dot02 = v0*v2;
-	double dot11 = v1*v1;
-	double dot12 = v1*v2;
-
-	double inverDeno = 1 / (dot00 * dot11 - dot01 * dot01);
-
-	double u = (dot11 * dot02 - dot01 * dot12) * inverDeno;
-	if (u < 0 || u > 1) // if u out of range, return directly
-	{
-		return false;
-	}
-
-	double v = (dot00 * dot12 - dot01 * dot02) * inverDeno;
-	if (v < 0 || v > 1) // if v out of range, return directly
-	{
-		return false;
-	}
-
-	return u + v <= 1;
-}
-
-void Vector2::CoutThis(string head)
-{
-	cout << head << " Vec2 x : " << x << " y : " << y << endl;
 }
 
 Quaternions::Quaternions()
@@ -343,6 +339,40 @@ Vector2 Vector2::operator-(const Vector2& v2)
 	return Vector2(x - v2.x, y - v2.y);
 }
 
+bool Vector2::InTriangle(Vector2 A, Vector2 B, Vector2 C, Vector2 P)
+{
+	Vector2 v0 = C - A;
+	Vector2 v1 = B - A;
+	Vector2 v2 = P - A;
+
+	double dot00 = v0 * v0;
+	double dot01 = v0 * v1;
+	double dot02 = v0 * v2;
+	double dot11 = v1 * v1;
+	double dot12 = v1 * v2;
+
+	double inverDeno = 1 / (dot00 * dot11 - dot01 * dot01);
+
+	double u = (dot11 * dot02 - dot01 * dot12) * inverDeno;
+	if (u < 0 || u > 1) // if u out of range, return directly
+	{
+		return false;
+	}
+
+	double v = (dot00 * dot12 - dot01 * dot02) * inverDeno;
+	if (v < 0 || v > 1) // if v out of range, return directly
+	{
+		return false;
+	}
+
+	return u + v <= 1;
+}
+
+void Vector2::CoutThis(string head)
+{
+	cout << head << " Vec2 x : " << x << " y : " << y << endl;
+}
+
 Color3::Color3()
 {
 	
@@ -354,4 +384,25 @@ Color3::Color3(int In_R, int In_G, int In_B)
 	G = In_G;
 	B = In_B;
 	S = 1;
+}
+
+Vector4::Vector4()
+{
+	x = 0.0;
+	y = 0.0;
+	z = 0.0;
+	w = 1.0;
+}
+
+Vector4::Vector4(double In_x, double In_y, double In_z, double In_w)
+{
+	x = In_x;
+	y = In_y;
+	z = In_z;
+	w = In_w;
+}
+
+void Vector4::CoutThis(string head)
+{
+	cout << head << " Vec3 x : " << x << " y : " << y << " z : " << z << " w : " << w << endl;
 }
