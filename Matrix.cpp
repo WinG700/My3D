@@ -259,10 +259,10 @@ Quaternions::Quaternions()
 
 Quaternions::Quaternions(Vector3 Axi, double Angle)
 {
-	x = Axi.x * sin(Radian(Angle));
-	y = Axi.y * sin(Radian(Angle));
-	z = Axi.z * sin(Radian(Angle));
-	w = cos(Radian(Angle));
+	x = Axi.x * sin(Radian(Angle/2.0));
+	y = Axi.y * sin(Radian(Angle/2.0));
+	z = Axi.z * sin(Radian(Angle/2.0));
+	w = cos(Radian(Angle/2.0));
 	Normalize();
 }
 

@@ -39,13 +39,6 @@ void UWorld::Tick(double DeltaSecond)
 				//Vector4 NewPoint22 = (*Cam->GetPerspectiveMatrix()) ^ Cam->WorldToCamera(Cam_Trans * A_Trans * Triangle->Point2);
 				//Vector4 NewPoint33 = (*Cam->GetPerspectiveMatrix()) ^ Cam->WorldToCamera(Cam_Trans * A_Trans * Triangle->Point3);
 				//NewPoint3.CoutThis();
-				//左手坐标系在透视矩阵变换后会上下左右颠倒
-				NewPoint1.x = -1.f * NewPoint1.x;
-				NewPoint1.y = -1.f * NewPoint1.y;
-				NewPoint2.x = -1.f * NewPoint2.x;
-				NewPoint2.y = -1.f * NewPoint2.y;
-				NewPoint3.x = -1.f * NewPoint3.x;
-				NewPoint3.y = -1.f * NewPoint3.y;
 				//if (NewPoint1.z >= 1.f || NewPoint2.z >= 1.f || NewPoint3.z >= 1.f)
 				//{
 				//	NewPoint1.CoutThis("1");
@@ -63,6 +56,7 @@ void UWorld::Tick(double DeltaSecond)
 			//k = (*Cam->GetPerspectiveMatrix()) * Cam->WorldToCamera(Cam_Trans * A_Trans * Triangle->Point3);
 		}
 	}
+	
 }
 
 UWorld::~UWorld()

@@ -1,5 +1,5 @@
 #pragma once
-#include <set>
+#include <vector>
 #include "Actor.h"
 #include "Camera.h"
 #include "Rasterization.h"
@@ -9,7 +9,7 @@ public:
 	UWorld();
 	~UWorld();
 	UWorld(Camera* In_Cam);
-	set<Actor*> Actors;
+	vector<Actor*> Actors;
 	Camera* Cam;
 	Rasterization* rasterization;
 	void Tick(double DeltaSecond);
