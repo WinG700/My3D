@@ -48,20 +48,22 @@ void Rasterization::DrawTringle(UTriangle* In_Triangles)
 	//cout << In_Triangles->Point2.x << " " << In_Triangles->Point2.y << endl;
 	//cout << In_Triangles->Point3.x << " " << In_Triangles->Point3.y << endl;
 	//cout << Vector2::InTriangle(Vector2(0, 1), Vector2(0, 0), Vector2(1, 0), Vector2(0.2, 0.2));
-	for (int i = 0; i < screen_h; i++)
-	{
-		for (int j = 0; j < screen_w; j++)
-		{
-			if (Vector2::InTriangle(Vector2(In_Triangles->Point1.x, In_Triangles->Point1.y), 
-									Vector2(In_Triangles->Point2.x, In_Triangles->Point2.y), 
-									Vector2(In_Triangles->Point3.x, In_Triangles->Point3.y), 
-									Vector2((double)j + 0.5f, (double)i + 0.5f)))
-			{
-				*Pixel[i][j].R = In_Triangles->color3.R;
-				*Pixel[i][j].G = In_Triangles->color3.G;
-				*Pixel[i][j].B = In_Triangles->color3.B;
-				//cout << "yes" <<endl;
-			}
-		}
-	}
+	//for (int i = 0; i < screen_h; i++)
+	//{
+	//	for (int j = 0; j < screen_w; j++)
+	//	{
+	//		if (Vector2::InTriangle(Vector2(In_Triangles->Point1.x, In_Triangles->Point1.y), 
+	//								Vector2(In_Triangles->Point2.x, In_Triangles->Point2.y), 
+	//								Vector2(In_Triangles->Point3.x, In_Triangles->Point3.y), 
+	//								Vector2((double)j + 0.5f, (double)i + 0.5f)))
+	//		{
+	//			*Pixel[i][j].R = In_Triangles->color3.R;
+	//			*Pixel[i][j].G = In_Triangles->color3.G;
+	//			*Pixel[i][j].B = In_Triangles->color3.B;
+	//			//cout << "yes" <<endl;
+	//		}
+	//	}
+	//}
+
+	In_Triangles->
 }

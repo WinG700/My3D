@@ -24,6 +24,7 @@ public:
 
 	PixelColor Pixel[screen_h][screen_w];
 	BufferPoint Buffer[screen_h][screen_w];
+	double ZBuffer[screen_h][screen_w];
 
 	vector<UTriangle*> Triangles;
 
