@@ -16,6 +16,6 @@ public:
 	void AddVertex(const vector<Vector3>& Vers);
 	void AddTringle(const vector<vector<int>>& TringleArr);
 	void AddTringle(const Vector3& Point1, const Vector3& Point2, const Vector3& Point3, bool bNormal = true);
-	void Tick(double DeltaSecond);
+	virtual void Tick(double DeltaSecond);
 };
 

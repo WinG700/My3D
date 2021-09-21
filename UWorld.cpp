@@ -14,6 +14,7 @@ void UWorld::Tick(double DeltaSecond)
 {
 	rasterization->DrawBackground();
 	Matrix4x4 Cam_Trans = Cam->ActorTransform.ToAffineMatrix(true);
+	Cam->Tick(DeltaSecond);
 	//Cam->ActorTransform.Quat.CoutThis("cam quat");
 	for (Actor* A : Actors)
 	{

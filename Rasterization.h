@@ -35,5 +35,15 @@ public:
 	Vector3 ToScreenPoint(Vector3 InPoint);
 
 	void DrawTringle(UTriangle* In_Triangles);
+
+	void DrawTringleThreePoint(const Vector3& top, const Vector3& mid, const Vector3& down, const Color3& color3);
+
+	void DrawTopTringle(const Vector3& TopPoint, double BaseEdge, double leftDx, double leftC, double rightDx, double rightC, double leftZ, double rightZ, const Color3& color3);
+
+	void DrawDownTringle(const Vector3& DownPoint, double BaseEdge, double leftDx, double leftC, double rightDx, double rightC, double leftZ, double rightZ, const Color3& color3);
+
+	void DrawYLine(double leftX, double rightX, int thisY, double leftZ, double rightZ, const Color3& color3);
+
+	void setColor(int x, int y, double Z, const Color3& color3);
 };
 

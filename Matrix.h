@@ -2,6 +2,8 @@
 #include <vector>
 #include <iostream>
 #include <math.h>
+#include <algorithm>
+#include <cmath>
 using namespace std;
 struct Matrix4x4;
 struct Matrix3x3;
@@ -13,12 +15,14 @@ struct Quaternions;
 #define Radian(x)  PI * x / 180.0
 #define NearZero(x) x <= 0.00000001 && x>=-0.00000001
 #define NearPlane 1.0
-#define FarPlane 300000.0
+#define FarPlane 3000.0
+#define MaxMin(ma, mi, val) max(min(val, ma), mi)
+#define DoubleLerp(x,y,z) x+MaxMin(1.0, 0.0, z)*(y-x) 
 
 constexpr int screen_w = 800;
 constexpr int screen_h = 450;
 
-
+Vector3 operator*(const Vector3& v3, const double& k);
 
 struct Matrix4x4
 {
@@ -63,6 +67,8 @@ struct Vector3
 	double operator*(const Vector3 &v3);
 	//²æ»ý
 	Vector3 operator^(const Vector3 &v3);
+
+	Vector3 operator*(const double& k);
 	//¹éÒ»»¯
 	void Normalize();
 	void CoutThis(string head);
@@ -96,6 +102,10 @@ struct Quaternions
 	Matrix4x4 ToMatrix4x4();
 	void CoutThis(string head);
 	Vector3 GetForward();
+	Vector3 GetRight();
+	Vector3 GetUp();
+	Quaternions Inversed();
+
 };
 
 struct Color3

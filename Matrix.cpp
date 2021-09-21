@@ -218,6 +218,11 @@ Vector3 Vector3::operator^(const Vector3& v3)
 	return Vector3(y*v3.z - z*v3.y, z*v3.x - x*v3.z, x*v3.y - y*v3.x);
 }
 
+Vector3 Vector3::operator*(const double& k)
+{
+	return Vector3(k * x, k * y, k * z);
+}
+
 void Vector3::Normalize()
 {
 	double k = sqrt(x*x + y*y + z*z);
@@ -307,6 +312,27 @@ Vector3 Quaternions::GetForward()
 	return a;
 }
 
+Vector3 Quaternions::GetRight()
+{
+	Vector3 a = ToMatrix4x4() * Vector3(0, 1, 0);
+	a.Normalize();
+	//a.CoutThis("GetForward");
+	return a;
+}
+
+Vector3 Quaternions::GetUp()
+{
+	Vector3 a = ToMatrix4x4() * Vector3(0, 0, 1);
+	a.Normalize();
+	//a.CoutThis("GetForward");
+	return a;
+}
+
+Quaternions Quaternions::Inversed()
+{
+	return Quaternions(-1.0*x, -1.0*y, -1.0*z, w);
+}
+
 Quaternions Quaternions::operator*(const Quaternions& Quat)
 {
 	double New_x = (y * Quat.z - z * Quat.y + x * Quat.w + w * Quat.x);
@@ -328,6 +354,8 @@ Vector2::Vector2(double In_x, double In_y)
 	x = In_x;
 	y = In_y;
 }
+
+
 
 double Vector2::operator*(const Vector2& v2)
 {

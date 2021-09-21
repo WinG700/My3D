@@ -1,9 +1,13 @@
 #pragma once
 #include <windows.h>
+#include <windowsx.h>
 
 int screen_exit = 0;
 int screen_mx = 0, screen_my = 0, screen_mb = 0;
 int screen_keys[512];	// 当前键盘按下状态
+int mouse_x=0;
+int mouse_y=0;
+bool bMouse_event = false;
 static HWND screen_handle = NULL;		// 主窗口 HWND
 static HDC screen_dc = NULL;			// 配套的 HDC
 static HBITMAP screen_hb = NULL;		// DIB
@@ -97,6 +101,22 @@ static LRESULT screen_events(HWND hWnd, UINT msg,
 	case WM_CLOSE: screen_exit = 1; break;
 	case WM_KEYDOWN: screen_keys[wParam & 511] = 1; break;
 	case WM_KEYUP: screen_keys[wParam & 511] = 0; break;
+	//case WM_MOUSEMOVE:screen_keys[wParam & 511] = 1; break;
+	case WM_RBUTTONDOWN: 
+		screen_keys[VK_RBUTTON] = 1; 
+		if(bMouse_event == false)
+		{
+			TRACKMOUSEEVENT tme;
+			tme.cbSize = sizeof(TRACKMOUSEEVENT);
+			tme.dwFlags = TME_LEAVE;
+			tme.hwndTrack = hWnd;
+			tme.dwHoverTime = 0;
+			::TrackMouseEvent(&tme);
+		}
+		break;
+	case WM_RBUTTONUP: screen_keys[VK_RBUTTON] = 0; break;
+	case WM_MOUSEMOVE: mouse_x = GET_X_LPARAM(lParam), mouse_y = GET_Y_LPARAM(lParam); break;
+	case WM_MOUSELEAVE: screen_keys[VK_RBUTTON] = 0;  cout<<"leave"<<endl; break;
 	default: return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 	return 0;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+//#include "Windows.h"
 class Camera :
     public Actor
 {
@@ -15,5 +16,16 @@ public:
 	Vector3 WorldToCamera(const Vector3& v3);
     Matrix4x4* GetPerspectiveMatrix();
     Matrix4x4* CreatePerPerspectiveMatrix(double N, double F);
+    virtual void Tick(double DeltaSecond) override;
+    void CameraMove(const Vector3& v3);
+    int* screen_keys;
+    int* mouse_x;
+    int* mouse_y;
+    int lastMouse_x;
+    int lastMouse_y;
+    double Mouse_Rot_factor = 10;
+    double Move_factor = 100;
+    double Lookup = 0;
+    double Turn = 0;
 };
 
