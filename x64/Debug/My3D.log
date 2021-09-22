@@ -1,4 +1,3 @@
 ﻿  My3D.cpp
-G:\My3D\Windows.h(30,9): warning C4838: 从“int”转换到“DWORD”需要收缩转换
-G:\My3D\My3D.cpp(84,31): warning C4244: “参数”: 从“double”转换到“DWORD”，可能丢失数据
-  My3D.vcxproj -> G:\My3D\x64\Debug\My3D.exe
+E:\My3D\Windows.h(30,9): warning C4838: conversion from 'int' to 'DWORD' requires a narrowing conversion
+  My3D.vcxproj -> E:\My3D\x64\Debug\My3D.exe

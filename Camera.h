@@ -23,7 +23,7 @@ public:
     int* mouse_y;
     int lastMouse_x;
     int lastMouse_y;
-    double Mouse_Rot_factor = 10;
+    double Mouse_Rot_factor = 20;
     double Move_factor = 100;
     double Lookup = 0;
     double Turn = 0;
