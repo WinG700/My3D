@@ -123,9 +123,7 @@ void Rasterization::DrawTringleThreePoint(const Vector3& top, const Vector3& mid
 	double depth_top =  abs(top.z);
 	double depth_down = abs(down.z);
 	double depth_mid = abs(mid.z);
-	double depth_other = DoubleLerp(depth_down, depth_top, (mid.y-down.y/top.y-down.y));
-
-	//cout<< depth_top << " " << depth_down << " " << depth_mid << " " << depth_other << endl ;
+	double depth_other = DoubleLerp(depth_down, depth_top, (mid.y-down.y)/(top.y-down.y));
 
 	if (NearZero(top_mid_dx) && NearZero(mid_down_dx))
 	{
@@ -177,9 +175,9 @@ void Rasterization::DrawTopTringle(const Vector3& topPoint, double BaseEdge, dou
 	{
 		return;
 	}
-	int chushi = topPoint.y > (double)(screen_h-1) ? (double)(screen_h - 1) : topPoint.y;
+	double chushi = topPoint.y > (double)(screen_h-1) ? (double)(screen_h - 1) : topPoint.y;
 	
-	for (int i = chushi; i >= (int)(BaseEdge+0.5) && i >= 0; --i)
+	for (int i = (int)chushi; i >= (int)(BaseEdge+0.5) && i >= 0; --i)
 	{
 		double thisY = i * 1.0 + 0.5;
 		double leftX = 0;
@@ -202,10 +200,12 @@ void Rasterization::DrawTopTringle(const Vector3& topPoint, double BaseEdge, dou
 			rightX = (thisY - rightC) / rightDx;
 			rightX = max(min(rightX, (double)screen_w), 0.0);
 		}
-		DrawYLine(leftX, rightX, i, DoubleLerp(topPoint.z, leftZ, (((double)i + 0.5) - topPoint.y) / (BaseEdge - topPoint.y)),
-									DoubleLerp(topPoint.z, rightZ, (((double)i + 0.5) - topPoint.y) / (BaseEdge - topPoint.y)), color3);
-
+		DrawYLine(leftX, rightX, i, DoubleLerp(topPoint.z, leftZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)),
+									DoubleLerp(topPoint.z, rightZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)), color3);
+		//cout << (((double)i + 0.5) - chushi) / (BaseEdge - chushi) << " ";
 	}
+	//cout << endl;
+	
 }
 //绘制下三角形
 void Rasterization::DrawDownTringle(const Vector3& DownPoint, double BaseEdge, double leftDx, double leftC, double rightDx, double rightC, double leftZ, double rightZ, const Color3& color3)
@@ -214,8 +214,8 @@ void Rasterization::DrawDownTringle(const Vector3& DownPoint, double BaseEdge, d
 	{
 		return;
 	}
-	int chushi = DownPoint.y > 0 ? (int)DownPoint.y : 0;
-	for (int i = chushi; i <= (int)(BaseEdge-0.5) && i < screen_h; ++i)
+	double chushi = DownPoint.y > 0 ? (int)DownPoint.y : 0;
+	for (int i = (int)chushi; i <= (int)(BaseEdge-0.5) && i < screen_h; ++i)
 	{
 		double thisY = i * 1.0 + 0.5;
 		double leftX = 0;
@@ -239,317 +239,8 @@ void Rasterization::DrawDownTringle(const Vector3& DownPoint, double BaseEdge, d
 			rightX = max(min(rightX, (double)screen_w), 0.0);
 		}
 
-		DrawYLine(leftX, rightX, i, DoubleLerp(DownPoint.z, leftZ, (((double)i + 0.5) - DownPoint.y) / (BaseEdge - DownPoint.y)),
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			.....
-			............DoubleLerp(DownPoint.z, rightZ, (((double)i + 0.5) - DownPoint.y) / (BaseEdge - DownPoint.y)), color3);
+		DrawYLine(leftX, rightX, i, DoubleLerp(DownPoint.z, leftZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)),
+									DoubleLerp(DownPoint.z, rightZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)), color3);
 	}
 }
 
@@ -570,6 +261,7 @@ void Rasterization::DrawYLine(double leftX, double rightX, int thisY, double lef
 		for (int j = (int)(leftX + 0.5); j <= (int)(rightX - 0.5); j++)
 		{
 			setColor(thisY, j, DoubleLerp(leftZ, rightZ, (((double)j+0.5)- leftX) / (rightX - leftX)), color3);
+			
 		}
 	//}
 }

@@ -41,6 +41,11 @@ void UWorld::Tick(double DeltaSecond)
 				//{
 				//}
 
+				//if (*Actors.begin() == A)
+				//{
+				//	cout << NewPoint1.z << " " << NewPoint2.z << " " << NewPoint3.z << " " << endl;
+				//}
+
 				rasterization->AddTringle(NewPoint1, NewPoint2, NewPoint3, Triangle->color3, false);
 			}
 			

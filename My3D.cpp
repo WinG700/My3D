@@ -24,7 +24,7 @@ void BuildWorld(UWorld* world)
 	double GroudSide = 200.0;
 	Actor* Ground = new Actor(FTransfrom(Vector3(0, 0, 0), Quaternions(0, 0, 0, 1)));
 	Ground->AddVertex({ Vector3(GroudSide, GroudSide, 0), Vector3(-1.0 * GroudSide, GroudSide, 0), Vector3(-1.0 * GroudSide, -1.0 * GroudSide, 0), Vector3(GroudSide, -1.0 * GroudSide, 0) });
-	Ground->AddTringle({ {0, 1, 3}/*,{2, 3, 1}*/ });
+	Ground->AddTringle({ {0, 1, 3},{2, 3, 1} });
 	world->Actors.push_back(Ground);
 	//Ground->AddTringle(Vector3(1000.f, 1000.f, 0), Vector3(-1000.f, 1000.f, 0), Vector3(1000.f, -1000.f, 0));
 	//Ground->AddTringle(Vector3(-1000.f, -1000.f, 0), Vector3(1000.f, -1000.f, 0), Vector3(-1000.f, 1000.f, 0));
@@ -33,7 +33,7 @@ void BuildWorld(UWorld* world)
 	Actor* TriangularPrism = new Actor(FTransfrom(Vector3(0, 0, 0), Quaternions(0, 0, 0, 1)));
 	TriangularPrism->ActorTransform.Quat = TriangularPrism->ActorTransform.Quat * Quaternions(Vector3(0, 0, 1), -3);
 	TriangularPrism->AddVertex({Vector3(100.0/cos(Radian(30.0)), 0, 0), Vector3(-100.0*tan(Radian(30.0)), 100.0, 0),  Vector3(-100.0 * tan(Radian(30.0)), -100.0, 0) , Vector3(0, 0, 150)});
-	TriangularPrism->AddTringle({/*{0, 1, 3},{2, 0, 3},*/ {1, 2, 3}});
+	TriangularPrism->AddTringle({{0, 1, 3},{2, 0, 3}, {1, 2, 3}});
 	//添加一个正方体
 	//double bianchang = 100.0;
 	//Actor* TriangularPrism = new Actor(FTransfrom(Vector3(0, 0, 0), Quaternions(0, 0, 0, 1)));
@@ -56,7 +56,7 @@ int main()
 	long last_time = clock();
 	double LockFPSTime = 1000.0/ LOCKFPS;
 	Rasterization* rasterization = new Rasterization(screen_fb); //创建栅格化器
-	Camera* cam = new Camera(FTransfrom(Vector3(-300, 0, 150.0), Quaternions(0, 0, 0, 1))); //创建相机
+	Camera* cam = new Camera(FTransfrom(Vector3(-300, 0, 200.0), Quaternions(0, 0, 0, 1))); //创建相机
 	//Camera* cam = new Camera(FTransfrom(Vector3(0, 0, 1500.0), Quaternions(Vector3(0, 1, 0), 90))); //创建相机
 	UWorld* World = CreateWorld(cam); //创建世界
 	World->rasterization = rasterization;
