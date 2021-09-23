@@ -200,8 +200,8 @@ void Rasterization::DrawTopTringle(const Vector3& topPoint, double BaseEdge, dou
 			rightX = (thisY - rightC) / rightDx;
 			rightX = max(min(rightX, (double)screen_w), 0.0);
 		}
-		DrawYLine(leftX, rightX, i, DoubleLerp(topPoint.z, leftZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)),
-									DoubleLerp(topPoint.z, rightZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)), color3);
+		DrawYLine(leftX, rightX, i, DoubleLerp(topPoint.z, leftZ, (((double)i + 0.5) - topPoint.y) / (BaseEdge - topPoint.y)),
+									DoubleLerp(topPoint.z, rightZ, (((double)i + 0.5) - topPoint.y) / (BaseEdge - topPoint.y)), color3);
 		//cout << (((double)i + 0.5) - chushi) / (BaseEdge - chushi) << " ";
 	}
 	//cout << endl;
@@ -239,8 +239,8 @@ void Rasterization::DrawDownTringle(const Vector3& DownPoint, double BaseEdge, d
 			rightX = max(min(rightX, (double)screen_w), 0.0);
 		}
 
-		DrawYLine(leftX, rightX, i, DoubleLerp(DownPoint.z, leftZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)),
-									DoubleLerp(DownPoint.z, rightZ, (((double)i + 0.5) - chushi) / (BaseEdge - chushi)), color3);
+		DrawYLine(leftX, rightX, i, DoubleLerp(DownPoint.z, leftZ, (((double)i + 0.5) - DownPoint.y) / (BaseEdge - DownPoint.y)),
+									DoubleLerp(DownPoint.z, rightZ, (((double)i + 0.5) - DownPoint.y) / (BaseEdge - DownPoint.y)), color3);
 	}
 }
 

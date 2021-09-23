@@ -69,7 +69,7 @@ int main()
 	World->Tick(0.f);
 	while (screen_exit == 0 && screen_keys[VK_ESCAPE] == 0) {
 		//cam->ActorTransform.Quat = cam->ActorTransform.Quat * Quaternions(Vector3(0, 0, 1), -0.5);
-		World->Actors[1]->ActorTransform.Quat = World->Actors[1]->ActorTransform.Quat * Quaternions(Vector3(0, 0, 1), -3);
+		World->Actors[1]->ActorTransform.Quat = World->Actors[1]->ActorTransform.Quat * Quaternions(Vector3(0, 0, 1), -1);
 		fps_time = clock();
 		double DeltaSeconds = (double)(fps_time - last_time) / 1000.0;
 		World->Tick(DeltaSeconds);
