@@ -1,3 +1,2 @@
-﻿  My3D.cpp
-E:\My3D\Windows.h(30,9): warning C4838: conversion from 'int' to 'DWORD' requires a narrowing conversion
-  My3D.vcxproj -> E:\My3D\x64\Debug\My3D.exe
+﻿  Rasterization.cpp
+  My3D.vcxproj -> G:\My3D\x64\Debug\My3D.exe

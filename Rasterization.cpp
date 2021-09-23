@@ -13,6 +13,7 @@ Rasterization::Rasterization(unsigned char* P)
 			Pixel[i][j].S = P + (i * screen_w + j) * 4 + 3;
 		}
 	}
+
 }
 
 void Rasterization::DrawBackground()
@@ -22,9 +23,12 @@ void Rasterization::DrawBackground()
 	{
 		for (int j = 0; j < screen_w; j++)
 		{
-			*Pixel[i][j].R = 102;//(unsigned char)(i * 255.f / screen_h);
-			*Pixel[i][j].G = 204;//(unsigned char)(j * 255.f / screen_w);
-			*Pixel[i][j].B = 255;
+			//*Pixel[i][j].R = 102;
+			//*Pixel[i][j].G = 204;
+			//*Pixel[i][j].B = 255;
+			*Pixel[i][j].R = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 140];
+			*Pixel[i][j].G = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 139];
+			*Pixel[i][j].B = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 138];
 		}
 	}
 

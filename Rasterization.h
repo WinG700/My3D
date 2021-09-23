@@ -28,6 +28,8 @@ public:
 
 	vector<UTriangle*> Triangles;
 
+	char* BackGround_BMP;
+
 	void DrawBackground();
 
 	void AddTringle(Vector3 Point1, Vector3 Point2, Vector3 Point3, Color3 In_Color, bool bNormal = true);

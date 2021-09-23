@@ -4,6 +4,7 @@
 #include <math.h>
 #include <algorithm>
 #include <cmath>
+#include <fstream>
 using namespace std;
 struct Matrix4x4;
 struct Matrix3x3;
