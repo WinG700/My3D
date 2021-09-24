@@ -254,6 +254,16 @@ void Vector3::CheckZero()
 	}
 }
 
+Vector3 operator*(const Vector3& v3, const double& k)
+{
+	return Vector3(v3.x*k, v3.y*k, v3.z*k);
+}
+
+Vector3 operator*(const double& k, const Vector3& v3)
+{
+	return Vector3(v3.x * k, v3.y * k, v3.z * k);
+}
+
 Quaternions::Quaternions()
 {
 	x = 0;

@@ -23,7 +23,7 @@ struct Quaternions;
 constexpr int screen_w = 800;
 constexpr int screen_h = 450;
 
-Vector3 operator*(const Vector3& v3, const double& k);
+Vector3 operator*(const double& k, const Vector3& v3);
 
 struct Matrix4x4
 {
@@ -73,7 +73,6 @@ struct Vector3
 	//πÈ“ªªØ
 	void Normalize();
 	void CoutThis(string head);
-
 	void CheckZero();
 };
 

@@ -147,6 +147,7 @@
     <ClCompile Include="Rasterization.cpp" />
     <ClCompile Include="UTriangle.cpp" />
     <ClCompile Include="UWorld.cpp" />
+    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="UTriangle.h" />
     <ClInclude Include="UWorld.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="Windows.h" />
   </ItemGroup>
   <ItemGroup>
