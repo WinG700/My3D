@@ -7,6 +7,7 @@
 #include "Rasterization.h"
 #include "Camera.h"
 #include "Windows.h"
+#include "FunctionLibrary.h"
 #include "UWorld.h"
 
 #define LOCKFPS 120
@@ -52,24 +53,11 @@ int main()
 	if (screen_init(screen_w, screen_h, A))
 		return -1;
 
-	// 1. 打开图片文件
-	ifstream is("LM.bmp", ifstream::in | ios::binary);
-	// 2. 计算图片长度
-	is.seekg(0, is.end);
-	int length = is.tellg();
-	is.seekg(0, is.beg);
-	// 3. 创建内存缓存区
-	char* BG_buffer = new char[length];
-	// 4. 读取图片
-	is.read(BG_buffer, length);
-	// 到此，图片已经成功的被读取到内存（buffer）中
-	cout << length <<endl;
-
 	long fps_time = clock(); //计算帧率
 	long last_time = clock();
 	double LockFPSTime = 1000.0/ LOCKFPS;
 	Rasterization* rasterization = new Rasterization(screen_fb); //创建栅格化器
-	rasterization->BackGround_BMP = BG_buffer;
+	
 	Camera* cam = new Camera(FTransfrom(Vector3(-300, 0, 200.0), Quaternions(0, 0, 0, 1))); //创建相机
 	//Camera* cam = new Camera(FTransfrom(Vector3(0, 0, 1500.0), Quaternions(Vector3(0, 1, 0), 90))); //创建相机
 	UWorld* World = CreateWorld(cam); //创建世界
@@ -97,7 +85,7 @@ int main()
 		//update_time = clock();
 	}
 
-	delete[] BG_buffer;
+	//delete[] BG_buffer;
 	// 感谢评论区 @geocat 帮忙发现的bug，已经修正
-	is.close();
+	
 }

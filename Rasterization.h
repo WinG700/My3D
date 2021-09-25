@@ -2,6 +2,7 @@
 
 #include "Matrix.h"
 #include "UTriangle.h"
+#include "FunctionLibrary.h"
 
 struct PixelColor
 {
@@ -20,6 +21,8 @@ struct BufferPoint
 class Rasterization
 {
 public:
+	Rasterization() = default;
+	~Rasterization();
 	Rasterization(unsigned char* P);
 
 	PixelColor Pixel[screen_h][screen_w];

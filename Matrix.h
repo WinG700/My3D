@@ -4,7 +4,6 @@
 #include <math.h>
 #include <algorithm>
 #include <cmath>
-#include <fstream>
 using namespace std;
 struct Matrix4x4;
 struct Matrix3x3;
@@ -24,6 +23,7 @@ constexpr int screen_w = 800;
 constexpr int screen_h = 450;
 
 Vector3 operator*(const double& k, const Vector3& v3);
+//char* LoadTe
 
 struct Matrix4x4
 {

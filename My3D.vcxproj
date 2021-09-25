@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="FunctionLibrary.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="My3D.cpp" />
     <ClCompile Include="Rasterization.cpp" />
@@ -152,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="FunctionLibrary.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Rasterization.h" />
     <ClInclude Include="resource.h" />

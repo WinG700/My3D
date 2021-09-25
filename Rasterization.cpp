@@ -14,6 +14,13 @@ Rasterization::Rasterization(unsigned char* P)
 		}
 	}
 
+	BackGround_BMP = FunctionLibrary::LoadBMP("Sky.bmp");
+
+}
+
+Rasterization::~Rasterization()
+{
+	delete[] BackGround_BMP;
 }
 
 void Rasterization::DrawBackground()
@@ -26,9 +33,9 @@ void Rasterization::DrawBackground()
 			//*Pixel[i][j].R = 102;
 			//*Pixel[i][j].G = 204;
 			//*Pixel[i][j].B = 255;
-			*Pixel[i][j].R = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 140];
-			*Pixel[i][j].G = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 139];
-			*Pixel[i][j].B = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 138];
+			*Pixel[i][j].R = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 2];
+			*Pixel[i][j].G = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3 + 1];
+			*Pixel[i][j].B = BackGround_BMP[((screen_h - i - 1) * screen_w + j) * 3];
 		}
 	}
 

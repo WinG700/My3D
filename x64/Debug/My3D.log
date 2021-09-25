@@ -1,11 +1,7 @@
-﻿  Actor.cpp
-  Camera.cpp
-  Matrix.cpp
+﻿  Camera.cpp
   My3D.cpp
-E:\My3D\Windows.h(30,9): warning C4838: 从“int”转换到“DWORD”需要收缩转换
-E:\My3D\My3D.cpp(59,13): warning C4244: “初始化”: 从“std::streamoff”转换到“int”，可能丢失数据
+G:\My3D\Windows.h(30,9): warning C4838: 从“int”转换到“DWORD”需要收缩转换
   Rasterization.cpp
-  UTriangle.cpp
   UWorld.cpp
   正在生成代码...
-  My3D.vcxproj -> E:\My3D\x64\Debug\My3D.exe
+  My3D.vcxproj -> G:\My3D\x64\Debug\My3D.exe
