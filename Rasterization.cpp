@@ -114,28 +114,28 @@ void Rasterization::DrawTringle(UTriangle* In_Triangles)
 
 }
 
-//根据以y轴从小到大排序好的三个点绘制三角形
+
 void Rasterization::DrawTringleThreePoint(const Vector3& top, const Vector3& mid, const Vector3& down, const Color3& color3)
 {
 	if (down.y > (double)screen_h + 1.0 || top.y < 0)
 		return;
-	//计算斜率
+	/** 计算斜线一次函数的斜率 */
 	double top_mid_dx = (top.y - mid.y) / (top.x - mid.x);
-	//cout << "top_mid_dx " << top_mid_dx << endl;
 	double top_down_dx = (top.y - down.y) / (top.x - down.x);
-	//cout << "top_down_dx " << top_down_dx << endl;
 	double mid_down_dx = (down.y - mid.y) / (down.x - mid.x);
-	//cout << "mid_down_dx " << mid_down_dx << endl;
-	//计算常数
+
+	/** 计算斜线一次函数的常数 */
 	double top_mid_C = top.y - top.x * top_mid_dx;
 	double top_down_C = top.y - top.x * top_down_dx;
 	double mid_down_C = down.y - down.x * mid_down_dx;
 
+	/** 计算三个点的深度 */
 	double depth_top =  abs(top.z);
 	double depth_down = abs(down.z);
 	double depth_mid = abs(mid.z);
 	double depth_other = DoubleLerp(depth_down, depth_top, (mid.y-down.y)/(top.y-down.y));
 
+	/** 如果两条线的斜率基本都为0的话, 不进行绘制，直接返回 */
 	if (NearZero(top_mid_dx) && NearZero(mid_down_dx))
 	{
 		return;
