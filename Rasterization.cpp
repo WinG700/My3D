@@ -42,13 +42,13 @@ void Rasterization::DrawBackground()
 	memset(ZBuffer, 100, sizeof(ZBuffer));
 }
 
-void Rasterization::AddTringle(Vector3 Point1, Vector3 Point2, Vector3 Point3, Color3 In_Color, bool bNormal)
-{
-	UTriangle* LocalVar = new UTriangle(ToScreenPoint(Point1), ToScreenPoint(Point2), ToScreenPoint(Point3), In_Color);
-	if (bNormal)LocalVar->Calculate_NormalVector();
-	//Triangles.push_back(LocalVar);
-	DrawTringle(LocalVar);
-}
+//void Rasterization::AddTringle(Vertex* Point1, Vertex* Point2, Vertex* Point3)
+//{
+//	UTriangle* LocalVar = new UTriangle(/*ToScreenPoint(Point1)*/Point1, /*ToScreenPoint(Point2)*/Point2, /*ToScreenPoint(Point3)*/);
+//	if (bNormal)LocalVar->Calculate_NormalVector();
+//	//Triangles.push_back(LocalVar);
+//	DrawTringle(LocalVar);
+//}
 
 Vector3 Rasterization::ToScreenPoint(Vector3 InPoint)
 {
@@ -57,7 +57,7 @@ Vector3 Rasterization::ToScreenPoint(Vector3 InPoint)
 
 void Rasterization::DrawTringle(UTriangle* In_Triangles)
 {
-	//cout << In_Triangles->Point1.x << " " << In_Triangles->Point1.y<< endl;
+	//cout << In_Triangles->Point1.x << " " << In_Triangles->Point1.y << endl;
 	//cout << In_Triangles->Point2.x << " " << In_Triangles->Point2.y << endl;
 	//cout << In_Triangles->Point3.x << " " << In_Triangles->Point3.y << endl;
 	//cout << Vector2::InTriangle(Vector2(0, 1), Vector2(0, 0), Vector2(1, 0), Vector2(0.2, 0.2));
@@ -87,53 +87,53 @@ void Rasterization::DrawTringle(UTriangle* In_Triangles)
 	/*逐行求两边交点的绘制法                                                 */
 	/************************************************************************/
 
-	if (In_Triangles->Point1.y >= In_Triangles->Point2.y && In_Triangles->Point2.y >= In_Triangles->Point3.y)
+	if (In_Triangles->Point1->Location.y >= In_Triangles->Point2->Location.y && In_Triangles->Point2->Location.y >= In_Triangles->Point3->Location.y)
 	{
-		DrawTringleThreePoint(In_Triangles->Point1, In_Triangles->Point2, In_Triangles->Point3, In_Triangles->color3);
+		DrawTringleThreePoint(In_Triangles->Point1, In_Triangles->Point2, In_Triangles->Point3);
 	}
-	else if (In_Triangles->Point2.y >= In_Triangles->Point1.y && In_Triangles->Point1.y >= In_Triangles->Point3.y)
+	else if (In_Triangles->Point2->Location.y >= In_Triangles->Point1->Location.y && In_Triangles->Point1->Location.y >= In_Triangles->Point3->Location.y)
 	{
-		DrawTringleThreePoint(In_Triangles->Point2, In_Triangles->Point1, In_Triangles->Point3, In_Triangles->color3);
+		DrawTringleThreePoint(In_Triangles->Point2, In_Triangles->Point1, In_Triangles->Point3);
 	}
-	else if (In_Triangles->Point1.y >= In_Triangles->Point3.y && In_Triangles->Point3.y >= In_Triangles->Point2.y)
+	else if (In_Triangles->Point1->Location.y >= In_Triangles->Point3->Location.y && In_Triangles->Point3->Location.y >= In_Triangles->Point2->Location.y)
 	{
-		DrawTringleThreePoint(In_Triangles->Point1, In_Triangles->Point3, In_Triangles->Point2, In_Triangles->color3);
+		DrawTringleThreePoint(In_Triangles->Point1, In_Triangles->Point3, In_Triangles->Point2);
 	}
-	else if (In_Triangles->Point3.y >= In_Triangles->Point1.y && In_Triangles->Point1.y >= In_Triangles->Point2.y)
+	else if (In_Triangles->Point3->Location.y >= In_Triangles->Point1->Location.y && In_Triangles->Point1->Location.y >= In_Triangles->Point2->Location.y)
 	{
-		DrawTringleThreePoint(In_Triangles->Point3, In_Triangles->Point1, In_Triangles->Point2, In_Triangles->color3);
+		DrawTringleThreePoint(In_Triangles->Point3, In_Triangles->Point1, In_Triangles->Point2);
 	}
-	else if (In_Triangles->Point3.y >= In_Triangles->Point2.y && In_Triangles->Point2.y >= In_Triangles->Point1.y)
+	else if (In_Triangles->Point3->Location.y >= In_Triangles->Point2->Location.y && In_Triangles->Point2->Location.y >= In_Triangles->Point1->Location.y)
 	{
-		DrawTringleThreePoint(In_Triangles->Point3, In_Triangles->Point2, In_Triangles->Point1, In_Triangles->color3);
+		DrawTringleThreePoint(In_Triangles->Point3, In_Triangles->Point2, In_Triangles->Point1);
 	}
-	else if (In_Triangles->Point2.y >= In_Triangles->Point3.y && In_Triangles->Point3.y >= In_Triangles->Point1.y)
+	else if (In_Triangles->Point2->Location.y >= In_Triangles->Point3->Location.y && In_Triangles->Point3->Location.y >= In_Triangles->Point1->Location.y)
 	{
-		DrawTringleThreePoint(In_Triangles->Point2, In_Triangles->Point3, In_Triangles->Point1, In_Triangles->color3);
+		DrawTringleThreePoint(In_Triangles->Point2, In_Triangles->Point3, In_Triangles->Point1);
 	}
 
 }
 
 
-void Rasterization::DrawTringleThreePoint(const Vector3& top, const Vector3& mid, const Vector3& down, const Color3& color3)
+void Rasterization::DrawTringleThreePoint(Vertex* top, Vertex* mid, Vertex* down)
 {
-	if (down.y > (double)screen_h + 1.0 || top.y < 0)
+	if (down->Location.y > (double)screen_h + 1.0 || top->Location.y < 0)
 		return;
 	/** 计算斜线一次函数的斜率 */
-	double top_mid_dx = (top.y - mid.y) / (top.x - mid.x);
-	double top_down_dx = (top.y - down.y) / (top.x - down.x);
-	double mid_down_dx = (down.y - mid.y) / (down.x - mid.x);
+	double top_mid_dx = (top->Location.y - mid->Location.y) / (top->Location.x - mid->Location.x);
+	double top_down_dx = (top->Location.y - down->Location.y) / (top->Location.x - down->Location.x);
+	double mid_down_dx = (down->Location.y - mid->Location.y) / (down->Location.x - mid->Location.x);
 
 	/** 计算斜线一次函数的常数 */
-	double top_mid_C = top.y - top.x * top_mid_dx;
-	double top_down_C = top.y - top.x * top_down_dx;
-	double mid_down_C = down.y - down.x * mid_down_dx;
+	double top_mid_C = top->Location.y - top->Location.x * top_mid_dx;
+	double top_down_C = top->Location.y - top->Location.x * top_down_dx;
+	double mid_down_C = down->Location.y - down->Location.x * mid_down_dx;
 
 	/** 计算三个点的深度 */
-	double depth_top =  abs(top.z);
-	double depth_down = abs(down.z);
-	double depth_mid = abs(mid.z);
-	double depth_other = DoubleLerp(depth_down, depth_top, (mid.y-down.y)/(top.y-down.y));
+	double depth_top =  abs(top->Location.z);
+	double depth_down = abs(down->Location.z);
+	double depth_mid = abs(mid->Location.z);
+	double depth_other = DoubleLerp(depth_down, depth_top, (mid->Location.y-down->Location.y)/(top->Location.y-down->Location.y));
 
 	/** 如果两条线的斜率基本都为0的话, 不进行绘制，直接返回 */
 	if (NearZero(top_mid_dx) && NearZero(mid_down_dx))
@@ -142,25 +142,25 @@ void Rasterization::DrawTringleThreePoint(const Vector3& top, const Vector3& mid
 	}
 	else if (NearZero(top_mid_dx))
 	{
-		if (top.x > mid.x)
+		if (top->Location.x > mid->Location.x)
 		{
-			DrawDownTringle(down, mid.y, mid_down_dx, mid_down_C, top_down_dx, top_down_C, depth_mid, depth_top, color3);
+			DrawDownTringle(down->Location, mid->Location.y, mid_down_dx, mid_down_C, top_down_dx, top_down_C, depth_mid, depth_top);
 		}
 		else
 		{
-			DrawDownTringle(down, mid.y, top_down_dx, top_down_C, mid_down_dx, mid_down_C, depth_top, depth_mid, color3);
+			DrawDownTringle(down->Location, mid->Location.y, top_down_dx, top_down_C, mid_down_dx, mid_down_C, depth_top, depth_mid);
 		}
 		return;
 	}
 	else if (NearZero(mid_down_dx))
 	{
-		if (down.x > mid.x)
+		if (down->Location.x > mid->Location.x)
 		{
-			DrawTopTringle(top, mid.y, top_mid_dx, top_mid_C, top_down_dx, top_down_C, depth_mid, depth_down, color3);
+			DrawTopTringle(top->Location, mid->Location.y, top_mid_dx, top_mid_C, top_down_dx, top_down_C, depth_mid, depth_down);
 		}
 		else
 		{
-			DrawTopTringle(top, mid.y, top_down_dx, top_down_C, top_mid_dx, top_mid_C, depth_down, depth_mid, color3);
+			DrawTopTringle(top->Location, mid->Location.y, top_down_dx, top_down_C, top_mid_dx, top_mid_C, depth_down, depth_mid);
 		}
 		return;
 	}
@@ -178,7 +178,7 @@ void Rasterization::DrawTringleThreePoint(const Vector3& top, const Vector3& mid
 		DrawDownTringle(down, mid.y, top_down_dx, top_down_C, mid_down_dx, mid_down_C, depth_other, depth_mid, color3);
 	}
 }
-//绘制上三角形
+
 void Rasterization::DrawTopTringle(const Vector3& topPoint, double BaseEdge, double leftDx, double leftC, double rightDx, double rightC, double leftZ, double rightZ, const Color3& color3)
 {	
 	
@@ -218,7 +218,7 @@ void Rasterization::DrawTopTringle(const Vector3& topPoint, double BaseEdge, dou
 	//cout << endl;
 	
 }
-//绘制下三角形
+
 void Rasterization::DrawDownTringle(const Vector3& DownPoint, double BaseEdge, double leftDx, double leftC, double rightDx, double rightC, double leftZ, double rightZ, const Color3& color3)
 {
 	if (BaseEdge < 0.0)
@@ -256,7 +256,6 @@ void Rasterization::DrawDownTringle(const Vector3& DownPoint, double BaseEdge, d
 }
 
 
-//根据左右两个边界点绘制一行像素
 void Rasterization::DrawYLine(double leftX, double rightX, int thisY, double leftZ, double rightZ, const Color3& color3)
 {
 	//if ((int)leftX == (int)rightX)

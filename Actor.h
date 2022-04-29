@@ -10,12 +10,15 @@ public:
 	Actor(const FTransfrom &Trans);
 
 	FTransfrom ActorTransform;
+
+	/** 需要绘制的三角形 */
 	vector<UTriangle*> Triangles;
-	vector<Vector3> Vertexs;
+	/** 需要绘制的三角形顶点 */
+	vector<Vertex*> Vertexs;
 	string ActorName;
-	void AddVertex(const vector<Vector3>& Vers);
+	void AddVertex(const vector<Vertex*>& Vers);
 	void AddTringle(const vector<vector<int>>& TringleArr);
-	void AddTringle(const Vector3& Point1, const Vector3& Point2, const Vector3& Point3, bool bNormal = true);
+	void AddTringle(Vertex* Point1, Vertex* Point2, Vertex* Point3, bool bNormal = true);
 	virtual void Tick(double DeltaSecond);
 };
 
